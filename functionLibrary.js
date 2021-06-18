@@ -155,7 +155,8 @@ function randomGenerator(thingArray) {
 
 /* Link Builder: Takes an array of links and includes them in an unordered list. 
 It also assigns a common class to each link and ensures that a new tab is opened when a
-given link is clicked. */
+given link is clicked. This function also sets the anchor element's id to the name assigned to
+the link object.*/
 
 function linkBuilder(linkArray, ulVar, className, openNewTab) {
   for (let i = 0; i < linkArray.length; i++) {
