@@ -133,3 +133,58 @@ function countTrue(anArray) {
     return far;
   }
   
+/* Random Generator: Takes an array and returns a random item within that array. */
+
+function randomGenerator(thingArray) {
+  thingNum = thingArray.length - 1;
+  num = Math.round(Math.random() * thingNum);
+  return thingArray[num]; 
+};
+
+
+/* DOM MANIPULATION */
+
+/* Element Builder: Builds an element, assigns it a class name, and assigns a parent element.*/
+
+  function elementBuilder (elType, className, parent) {
+    const newElement = document.createElement(elType);
+    newElement.classList.add(className);
+    parent.appendChild(newElement);
+    return newElement;
+};
+
+/* Link Builder: Takes an array of links and includes them in an unordered list. 
+It also assigns a common class to each link and ensures that a new tab is opened when a
+given link is clicked. */
+
+function linkBuilder(linkArray, ulVar, className, openNewTab) {
+  for (let i = 0; i < linkArray.length; i++) {
+      linkLi = elementBuilder('li', className, ulVar);
+      linkAnchor = elementBuilder('a', 'nav-anchor', linkLi);
+      linkAnchor.textContent = linkArray[i].name;
+      linkAnchor.href = linkArray[i].link;
+      linkLi.setAttribute("id", `${linkArray[i].name.toLowerCase()}`);
+      
+      if (openNewTab === true) {
+          linkAnchor.rel = "noreferrer noopener";
+          linkAnchor.target = "blank";
+      };
+  };
+};
+
+/* Random image generator: Takes an object with a series of key-value pairs,
+and returns a random pair. The key is mean to be the alt description for an image,
+and the value is meant to be the image's file name. Incudes alt description as the second return value. */
+
+function randomImageGenerator(imagesObject) {
+  imageKeys = Object.keys(imagesObject);
+  imageProps = Object.values(imagesObject);
+  imageNum = imageKeys.length - 1;
+  num = Math.round(Math.random() * imageNum);
+  let newImageArray = [imageKeys[num], imageProps[num]];
+  return newImageArray;
+};
+
+
+
+
