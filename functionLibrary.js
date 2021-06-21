@@ -173,6 +173,16 @@ function linkBuilder(linkArray, ulVar, className, openNewTab) {
   };
 };
 
+/* Builds a button with a span as a child element. */
+
+function buttonBuilder(buttonClass, spanClass, parent) {
+  let button = elementBuilder("button", buttonClass, parent);
+  button.type = "button";
+  let span = elementBuilder("span", spanClass, button);
+  let buttonBuild = [button, span];
+  return buttonBuild;
+}
+
 /* Random image generator: Takes an object with a series of key-value pairs,
 and returns a random pair. The key is mean to be the alt description for an image,
 and the value is meant to be the image's file name. Incudes alt description as the second return value. */
