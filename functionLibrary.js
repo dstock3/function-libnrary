@@ -173,7 +173,7 @@ function linkBuilder(linkArray, ulVar, className, openNewTab) {
   };
 };
 
-/* Builds a button with a span as a child element. */
+/* Button Builder: Builds a button with a span as a child element. */
 
 function buttonBuilder(buttonClass, spanClass, parent) {
   let button = elementBuilder("button", buttonClass, parent);
@@ -181,7 +181,19 @@ function buttonBuilder(buttonClass, spanClass, parent) {
   let span = elementBuilder("span", spanClass, button);
   let buttonBuild = [button, span];
   return buttonBuild;
-}
+};
+
+/* Section Builder: Builds a section with a child div "container" and a row, specifically
+for integration with Bootstrap. */
+
+function sectionBuilder(sectionName) {
+  let section = elementBuilder("section", sectionName, body);
+  section.setAttribute("id", sectionName);
+  let sectionContainer = elementBuilder("div", "container", section);
+  let sectionRow = elementBuilder("div", "row", sectionContainer);
+  let sectionElements = [section, sectionContainer, sectionRow];
+  return sectionElements;
+};
 
 /* Random image generator: Takes an object with a series of key-value pairs,
 and returns a random pair. The key is mean to be the alt description for an image,
