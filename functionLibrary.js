@@ -183,6 +183,23 @@ function buttonBuilder(buttonClass, spanClass, parent) {
   return buttonBuild;
 };
 
+/* Button Builder Jr: Builds a series of buttons and appends them to a parent 
+based an array of strings. Need to include more functionality, ideally to filter 
+content based on the button's purpose. */
+
+function buttonBuilderJr(buttonArray, parent) {
+  let buttonElementArray = [];
+  for (i = 0; i < buttonArray.length; i++) {
+      let projectButton = elementBuilder("button", "btn", parent);
+      projectButton.type = "button";
+      projectButton.classList.add("btn-outline-primary");
+      projectButton.innerHTML = buttonArray[i];
+      buttonElementArray.push(projectButton);
+  };
+  return buttonElementArray;
+};
+
+
 /* Section Builder: Builds a section with a child div "container" and a row, specifically
 for integration with Bootstrap. */
 
