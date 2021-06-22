@@ -212,6 +212,40 @@ function sectionBuilder(sectionName) {
   return sectionElements;
 };
 
+/* Builds "project boxes" based on image data, and appends them to a parent element. 
+Need to add functionality for links.*/
+
+function projectBoxBuilder(imgSrc, projectTitle, description, parent) {
+  let projectBodyCol = elementBuilder("div", "col-lg-4", parent);
+  let projectBox = elementBuilder("div", "project-box", projectBodyCol);
+  projectBox.classList.add("shadow");
+  let projectImage = elementBuilder("img", "img-fluid", projectBox);
+  projectImage.alt = description;
+  projectImage.src = imgSrc;
+  projectImage.title = projectTitle;
+  let projectInfo = elementBuilder("div", "project-info", projectBox);
+  let caption = elementBuilder("div", "caption", projectInfo);
+  let captionHead = elementBuilder("h4", "caption-head", caption);
+  captionHead.innerHTML = projectTitle;
+  let captionDesc = elementBuilder("p", "caption-description", caption);
+  captionDesc.innerHTML = description;
+  let projectElements = [projectBodyCol, projectBox, projectImage, projectInfo, caption, captionHead, captionDesc];
+  return projectElements;
+};
+
+/* Project Iterator: Takes an array of objects containing project info and calls
+projectBoxBuilder to create a series of boxes." */
+
+function projectIterator(projectArray, parent) {
+  let projectElementsArray = [];
+  for (i = 0; i < projectArray.length; i++) {
+      let newProject = projectArray[i];
+      let newProjectElements = projectBoxBuilder(newProject.source, newProject.title, newProject.description, parent);
+      projectElementsArray.push(newProjectElements);
+  };
+  return projectElementsArray;
+};
+
 /* Random image generator: Takes an object with a series of key-value pairs,
 and returns a random pair. The key is mean to be the alt description for an image,
 and the value is meant to be the image's file name. Incudes alt description as the second return value. */
