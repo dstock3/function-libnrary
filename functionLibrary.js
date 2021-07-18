@@ -159,18 +159,26 @@ given link is clicked. This function also sets the anchor element's id to the na
 the link object.*/
 
 function linkBuilder(linkArray, ulVar, className, openNewTab) {
+  let linkElementArray = [];
   for (let i = 0; i < linkArray.length; i++) {
+      let linkElements = [];
       linkLi = elementBuilder('li', className, ulVar);
+      linkElements.push(linkLi);
       linkAnchor = elementBuilder('a', 'nav-anchor', linkLi);
       linkAnchor.textContent = linkArray[i].name;
       linkAnchor.href = linkArray[i].link;
+      linkElements.push(linkAnchor);
       linkLi.setAttribute("id", `${linkArray[i].name.toLowerCase()}`);
       
       if (openNewTab === true) {
           linkAnchor.rel = "noreferrer noopener";
           linkAnchor.target = "blank";
       };
+
+      linkElementArray.push(linkElements);
   };
+
+  return linkElementArray
 };
 
 /* Button Builder: Builds a button with a span as a child element. */
@@ -259,6 +267,31 @@ function randomImageGenerator(imagesObject) {
   return newImageArray;
 };
 
+function videoBuilder(newVideoData, parent) {
+  let newVideoContainer = elementBuilder('div', 'video-container', parent);
+  let newVideoHead = elementBuilder('h2', 'video-head', newVideoContainer);
+  newVideoHead.textContent = newVideoData.title;
+  let newVideoDescription = elementBuilder('article', 'video-para', newVideoContainer);
+  if (newVideoData.description === undefined) {
+      newVideoData.description = "";
+  };
+  newVideoDescription.innerHTML = newVideoData.description;
+  let vidDiv = elementBuilder('div', 'vid-div', newVideoContainer);
+  vidDiv.innerHTML = `<iframe src="${newVideoData.iframeRef}" loading="lazy" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>`;
+  let spacer = spaceCreator(mainBody);
+  let videoElements = [newVideoContainer, newVideoHead, newVideoDescription, vidDiv, spacer];
+  return videoElements;
+}
 
-
+function videoArrayHandler(videoArray) {
+  let videoElementsArray = [];
+  for (i = 0; i < videoArray.length; i++) {
+      let videoElements = videoBuilder(videoArray[i]);
+      let video = document.getElementsByTagName('iframe')[i];
+      videoElements.push(video);
+      video.classList.add('video');
+      videoElementsArray.push(videoElements);
+  }
+  return videoElementsArray
+}
 
